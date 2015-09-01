@@ -1,0 +1,78 @@
+Request and request flow
+As with any other PHP application, we have a single file as an entry point for every request; in the case of Magento this file is index.php, which is in charge of loading the Mage.php bootstrap class and starting the request cycle. It then goes through the following steps:
+1. The web server receives the request and Magento is instantiated by calling the bootstrap file, Mage.php.
+2. The frontend controller is instantiated and initialized; during this controller initialization Magento searches for the web routes and instantiates them.
+3. Magento then iterates through each of the routers and calls the match. The match method is responsible for processing the URL and generating the corresponding controller and action.
+4. Magento then instantiates the matching controller and takes the corresponding action.
+Routers are especially important in this process. The Router objects are used by the frontend controller to match a requested URL (route) to a module controller and action. By default, Magento comes with the following routers:
+• Mage_Core_Controller_Varien_Router_Admin
+• Mage_Core_Controller_Varien_Router_Standard • Mage_Core_Controller_Varien_Router_Default
+The action controller will then load and render the layout, which in turn will load the corresponding blocks, models, and templates.
+
+
+Models:
++ Simple models
++ Entity Attribute Value Models
+
+In addition to that, each Model type is formed by the following layers:
+• Model class: Here is where most of our business logic resides. Models are used to manipulate the data, but they don't access it directly.
+• Resource Model class: Resource Models are used to interact with
+the database on behalf of our models. They are in charge of the actual CRUD operations.
+• Model Collection class: Each Data Model has a collection class; collections are objects that hold a number of individual Magento Model instances.
+
+
+Views :
++ Layouts
++ Blocks
++ Template
+
+Scope setting:
+The different configuration scopes available in Magento are:
+• Global: As the name implies, this applies across all scopes.
+• Website: These are defined by a domain name and are composed by one or more stores. Websites can be set up to share customer data or be completely isolated.
+• Store: Stores are used to manage products and categories, and to group store views. Stores also have a root category that allows us to have separated catalogs per store.
+• Store view: By using store views we can set up multiple languages on our store frontend.
+
+
+Magento Community Edition currently has eight different types of EAV objects:
+• Customer
+• Customer address
+• Products
+• Product categories
+• Orders
+• Invoices
+• Credit memos
+• Shipments
+
+
+Magento Collection
+Some of the most useful collection methods are:
+• addAttributeToSelect: To add an attribute to entities in a collection, * can be used as a wildcard to add all available attributes
+• addFieldToFilter: To add an attribute filter to a collection, this function is used on regular, non-EAV models
+• addAttributeToFilter: This method is used to filter a collection of EAV entities
+• addAttributeToSort: This method is used to add an attribute to sort order
+• addStoreFilter: This method is used to store an availability filter; it includes the availability product
+• addWebsiteFilter: This method is used to add a website filter to a collection
+• addCategoryFilter: This method is used to specify a category filter for a
+product collection
+• addUrlRewrite: This method is used to add URL rewrites data to a product
+• setOrder: This method is used to set the sorting order of a collection
+
+
+The visibility attribute is a special attribute used by products to control where products are shown; it has the following values:
+• Not visible individually: It has a value 1
+• Catalog: It has a value 2
+• Search: It has a value 3
+• Catalog and Search: It has a value 4
+
+
+By adding that extra filter, we require products to have a small image specified;
+by default, Magento has three products: image types, thumbnail, and small_image and image.
+These three types are used on different parts of the application.
+We could even set up a stricter rule for products if we wanted to.
+
+We are also using the fetchAll() method. This will return all the rows of our query as an array, but this is not the only option available; we also have fetchCol() and fetchOne() at our disposal. Let's have a look at the following functions:
+• fetchAll: This function retrieves all the rows returned by the original query
+• fetchOne: This function will return only the values from the first database
+row returned by the query
+• fetchCol: This function will return all the rows returned by the query but only the first rows; this is useful if you only want to retrieve a single column with unique identifiers such as products IDs or SKUs
