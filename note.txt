@@ -76,3 +76,9 @@ We are also using the fetchAll() method. This will return all the rows of our qu
 • fetchOne: This function will return only the values from the first database
 row returned by the query
 • fetchCol: This function will return all the rows returned by the query but only the first rows; this is useful if you only want to retrieve a single column with unique identifiers such as products IDs or SKUs
+
+
+Since Magento 1.6, the naming convention for the setup script has changed and now developers can make use of three different script types:
+• Install: This script is used when the module is first installed and no record of it exists on the core_resource table
+• Upgrade: This script is used if the version in the core_resource table is lower than the one in the config.xml file
+• Data: This script will run after the matching version install/upgrade script and are used to populate the tables with required data
