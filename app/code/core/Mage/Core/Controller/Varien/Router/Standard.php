@@ -194,6 +194,7 @@ class Mage_Core_Controller_Varien_Router_Standard extends Mage_Core_Controller_V
             $this->_checkShouldBeSecure($request, '/'.$module.'/'.$controller.'/'.$action);
 
             $controllerClassName = $this->_validateControllerClassName($realModule, $controller);
+
             if (!$controllerClassName) {
                 continue;
             }
@@ -216,6 +217,7 @@ class Mage_Core_Controller_Varien_Router_Standard extends Mage_Core_Controller_V
         /**
          * if we did not found any suitable
          */
+
         if (!$found) {
             if ($this->_noRouteShouldBeApplied()) {
                 $controller = 'index';

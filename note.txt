@@ -82,3 +82,11 @@ Since Magento 1.6, the naming convention for the setup script has changed and no
 • Install: This script is used when the module is first installed and no record of it exists on the core_resource table
 • Upgrade: This script is used if the version in the core_resource table is lower than the one in the config.xml file
 • Data: This script will run after the matching version install/upgrade script and are used to populate the tables with required data
+
+
+Note that by adding our templates and layouts to the base/default theme, we'll make our templates and layouts available to all stores and themes.
+
+So here we are using a new function, Mage::register(), which is setting a global variable that we can later retrieve into the application flow by any method. This function is part of the Magento Registry pattern that is compromised of the following three functions:
+• Mage::register(): This function is used to set global variables
+• Mage::unregister(): This function is used to unset global variables
+• Mage::registry(): This function is used to retrieve global variables

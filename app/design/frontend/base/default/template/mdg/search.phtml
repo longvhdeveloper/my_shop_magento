@@ -1,0 +1,40 @@
+<?php
+$helper = Mage::helper('mdg_giftregistry');
+?>
+<form action="<?php echo $this->getUrl('giftregistry/search/results/') ?>" method="post" id="form-validate">
+    <fieldset>
+        <?php echo $this->getBlockHtml('form-key'); ?>
+        <ul class="form-list">
+            <li>
+                <label for="type"><?php echo $this->__('Event type') ?></label>
+                <select name="search_params[type]" id="type">
+                    <?php foreach ($helper->getEventTypes() as $type): ?>
+                        <option id="<?php echo $type->getCode(); ?>" value="<?php echo $type->getTypeId(); ?>"><?php echo $type->getName(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </li>
+            <li class="field">
+                <label class="giftreg" for="name"><?php echo $this->__('Event Name') ?></label>
+                <input type="text" name="search_params[name]", id="name" value="" title="<?php echo $this->__('Event Name') ?>">
+            </li>
+            <li class="field">
+                <label class="giftreg" for="location"><?php echo $this->__('Location') ?></label>
+                <input type="text" name="search_params[location]", id="location" value="" title="<?php echo $this->__('Location') ?>">
+            </li>
+            <li class="field">
+                <label class="giftreg" for="country"><?php echo $this->__('Country') ?></label>
+                <input type="text" name="search_params[country]", id="country" value="" title="<?php echo $this->__('Country') ?>">
+            </li>
+        </ul>
+        <div class="button-set">
+            <button class="button" type="submit" title="<?php echo $this->__('Search'); ?>">
+                <span><?php echo $this->__('Search'); ?></span>
+            </button>
+        </div>
+    </fieldset>
+</form>
+<script type="text/javascript">
+    //<! [CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    //]]>
+</script>
